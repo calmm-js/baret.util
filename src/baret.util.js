@@ -52,8 +52,8 @@ export const flatMapParallel = /*#__PURE__*/I_curry((fn, xs) =>
   toConstant(xs).flatMap(pipe2U(fn, toConstant)))
 export const flatMapSerial = /*#__PURE__*/I_curry((fn, xs) =>
   toConstant(xs).flatMapConcat(pipe2U(fn, toConstant)))
-export const flatMapErrors = /*#__PURE__*/I_curry((fn, xs) =>
-  toConstant(xs).flatMapErrors(pipe2U(fn, toConstant)))
+export const flatMapError = /*#__PURE__*/I_curry((fn, xs) =>
+  toConstant(xs).flatMapError(pipe2U(fn, toConstant)))
 export const flatMapLatest = /*#__PURE__*/I_curry((fn, xs) =>
   toConstant(xs).flatMapLatest(pipe2U(fn, toConstant)))
 export const foldPast = /*#__PURE__*/I_curry((fn, s, xs) => toConstant(xs).scan(s, fn))
@@ -71,7 +71,7 @@ export const startWith = /*#__PURE__*/I_curry((x, xs) => toConstant(xs).startWit
 export const sink = /*#__PURE__*/pipe2U(startWith(undefined), lift(toUndefined))
 export const takeFirst = /*#__PURE__*/I_curry((n, xs) => toConstant(xs).take(n))
 export const lastEvent = /*#__PURE__*/I_curry(xs => toConstant(xs).last())
-export const takeUntilBy = /*#__PURE__*/I_curry((ts, xs) => toConstant(xs).takeUntilBy(ts))
+export const takeUntil = /*#__PURE__*/I_curry((ts, xs) => toConstant(xs).takeUntil(ts))
 export const toProperty = xs => toConstant(xs).toProperty()
 export const throttle = /*#__PURE__*/I_curry((ms, xs) => toConstant(xs).throttle(ms))
 
