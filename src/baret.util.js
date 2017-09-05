@@ -85,7 +85,7 @@ export const set = /*#__PURE__*/I_curry((settable, xs) => {
 //
 
 export const Bus = B.Bus
-export const bus = () => Bus()
+export const bus = Bus
 
 //
 
