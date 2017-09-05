@@ -23,7 +23,7 @@ var template = function template(observables) {
   return K__default(observables, infestines.id);
 };
 
-// Kefir
+// Bacon
 
 var toUndefined = function toUndefined(_) {};
 var toConstant = function toConstant(x) {
@@ -52,8 +52,8 @@ var flatMapParallel = /*#__PURE__*/infestines.curry(function (fn, xs) {
 var flatMapSerial = /*#__PURE__*/infestines.curry(function (fn, xs) {
   return toConstant(xs).flatMapConcat(infestines.pipe2U(fn, toConstant));
 });
-var flatMapErrors = /*#__PURE__*/infestines.curry(function (fn, xs) {
-  return toConstant(xs).flatMapErrors(infestines.pipe2U(fn, toConstant));
+var flatMapError = /*#__PURE__*/infestines.curry(function (fn, xs) {
+  return toConstant(xs).flatMapError(infestines.pipe2U(fn, toConstant));
 });
 var flatMapLatest = /*#__PURE__*/infestines.curry(function (fn, xs) {
   return toConstant(xs).flatMapLatest(infestines.pipe2U(fn, toConstant));
@@ -94,8 +94,8 @@ var takeFirst = /*#__PURE__*/infestines.curry(function (n, xs) {
 var lastEvent = /*#__PURE__*/infestines.curry(function (xs) {
   return toConstant(xs).last();
 });
-var takeUntilBy = /*#__PURE__*/infestines.curry(function (ts, xs) {
-  return toConstant(xs).takeUntilBy(ts);
+var takeUntil = /*#__PURE__*/infestines.curry(function (ts, xs) {
+  return toConstant(xs).takeUntil(ts);
 });
 var toProperty = function toProperty(xs) {
   return toConstant(xs).toProperty();
@@ -114,9 +114,7 @@ var set = /*#__PURE__*/infestines.curry(function (settable, xs) {
 //
 
 var Bus = B__default.Bus;
-var bus = function bus() {
-  return Bus();
-};
+var bus = Bus;
 
 //
 
@@ -289,13 +287,7 @@ function iftes() {
 //
 
 var view = /*#__PURE__*/infestines.curry(function (l, xs) {
-  return (
-    /*xs instanceof AbstractMutable
-    ? l instanceof Observable
-      ? new Join(K(l, l => xs.view(l)))
-      : xs.view(l)
-    : */K__default(l, xs, partial_lenses.get)
-  );
+  return xs instanceof B.Observable && infestines.isFunction(xs.view) ? xs.view(l) : K__default(l, xs, partial_lenses.get);
 });
 
 //
@@ -754,7 +746,7 @@ exports.endWith = endWith;
 exports.mapValue = mapValue;
 exports.flatMapParallel = flatMapParallel;
 exports.flatMapSerial = flatMapSerial;
-exports.flatMapErrors = flatMapErrors;
+exports.flatMapError = flatMapError;
 exports.flatMapLatest = flatMapLatest;
 exports.foldPast = foldPast;
 exports.interval = interval;
@@ -770,7 +762,7 @@ exports.startWith = startWith;
 exports.sink = sink;
 exports.takeFirst = takeFirst;
 exports.lastEvent = lastEvent;
-exports.takeUntilBy = takeUntilBy;
+exports.takeUntil = takeUntil;
 exports.toProperty = toProperty;
 exports.throttle = throttle;
 exports.set = set;
