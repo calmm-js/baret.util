@@ -37,7 +37,7 @@ export const template = observables => K(observables, id)
 
 export {fromBacon}
 
-// Kefir
+// Bacon
 
 const toUndefined = _ => {}
 const toConstant = x => x instanceof Observable ? x : constant(x)
