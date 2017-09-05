@@ -15,6 +15,7 @@ import {
   id,
   identicalU,
   inherit,
+  isFunction,
   isDefined,
   pipe2U,
   seq,
@@ -231,11 +232,9 @@ export function iftes() {
 //
 
 export const view = /*#__PURE__*/I_curry((l, xs) =>
-  /*xs instanceof AbstractMutable
-  ? l instanceof Observable
-    ? new Join(K(l, l => xs.view(l)))
-    : xs.view(l)
-  : */K(l, xs, get))
+  xs instanceof Observable && isFunction(xs.view)
+  ? xs.view(l)
+  : K(l, xs, get))
 
 //
 
