@@ -1,0 +1,25 @@
+{
+  "name": "baret.util",
+  "description": "Utilities for working with Baret",
+  "main": "dist/baret.util.js",
+  "license": "MIT",
+  "keywords": [
+    "react",
+    "bacon",
+    "atom",
+    "lens",
+    "ramda"
+  ],
+  "homepage": "https://github.com/calmm-js/baret",
+  "dependencies": {
+    "bacon.atom": "^5.0.0",
+    "bacon.combines": "^0.1",
+    "baconjs": "^0.7.94",
+    "baret": "^1.0.0",
+    "infestines": "^0.4.4",
+    "partial.lenses": "^11.0.0",
+    "prop-types": "^15.5.6",
+    "ramda": "^0.24.0"
+  },
+  "ignore": ["*", "!*.md", "!dist/*"]
+}
