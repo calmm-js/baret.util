@@ -10,6 +10,7 @@ export default {
              "bacon.atom",
              "partial.lenses",
              "prop-types",
+             "react",
              "ramda",
              "baconjs",
              "bacon.combines"],
@@ -21,6 +22,7 @@ export default {
     "bacon.atom": "bacon.atom",
     "partial.lenses": "L",
     "prop-types": "PropTypes",
+    "react": "React",
     "ramda": "R"
   },
   plugins: [
@@ -28,7 +30,14 @@ export default {
       "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV)
     }),
     nodeResolve(),
-    commonjs({include: 'node_modules/**'}),
+    commonjs({
+      include: 'node_modules/**',
+      namedExports: {
+        "node_modules/react/react.js": [
+          "PropTypes"
+        ]
+      }
+    }),
     babel(),
     process.env.NODE_ENV === "production" &&
       uglify()

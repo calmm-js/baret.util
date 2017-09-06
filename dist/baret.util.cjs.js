@@ -14,7 +14,7 @@ var K = require('bacon.combines');
 var K__default = _interopDefault(K);
 var React = require('baret');
 var React__default = _interopDefault(React);
-var PropTypes = _interopDefault(require('prop-types'));
+var react = require('react');
 
 var liftStaged = function liftStaged(fn) {
   return K.lift(infestines.pipe2U(fn, K.lift));
@@ -292,7 +292,7 @@ var view = /*#__PURE__*/infestines.curry(function (l, xs) {
 
 //
 
-var types = { context: PropTypes.any };
+var types = { context: react.PropTypes.any };
 
 var Context = /*#__PURE__*/infestines.inherit(function Context(props$$1) {
   Context.childContextTypes = types;

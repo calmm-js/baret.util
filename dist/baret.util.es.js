@@ -5,7 +5,7 @@ import { arityN, assocPartialU, curry as curry$1, curryN as curryN$1, dissocPart
 import { findHint, get } from 'partial.lenses';
 import K, { lift, lift1, lift1Shallow } from 'bacon.combines';
 import React, { fromBacon } from 'baret';
-import PropTypes from 'prop-types';
+import { PropTypes } from 'react';
 
 var liftStaged = function liftStaged(fn) {
   return lift(pipe2U(fn, lift));

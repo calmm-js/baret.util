@@ -1,14 +1,13 @@
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('ramda'), require('bacon.atom'), require('baconjs'), require('infestines'), require('partial.lenses'), require('bacon.combines'), require('baret'), require('prop-types')) :
-	typeof define === 'function' && define.amd ? define(['exports', 'ramda', 'bacon.atom', 'baconjs', 'infestines', 'partial.lenses', 'bacon.combines', 'baret', 'prop-types'], factory) :
-	(factory((global.baret = global.baret || {}, global.baret.util = {}),global.R,global.bacon.atom,global.Bacon,global.I,global.L,global.K,global.baret,global.PropTypes));
-}(this, (function (exports,R,Atom,B,infestines,partial_lenses,K,React,PropTypes) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('ramda'), require('bacon.atom'), require('baconjs'), require('infestines'), require('partial.lenses'), require('bacon.combines'), require('baret'), require('react')) :
+	typeof define === 'function' && define.amd ? define(['exports', 'ramda', 'bacon.atom', 'baconjs', 'infestines', 'partial.lenses', 'bacon.combines', 'baret', 'react'], factory) :
+	(factory((global.baret = global.baret || {}, global.baret.util = {}),global.R,global.bacon.atom,global.Bacon,global.I,global.L,global.K,global.baret,global.React));
+}(this, (function (exports,R,Atom,B,infestines,partial_lenses,K,React,react) { 'use strict';
 
 Atom = Atom && Atom.hasOwnProperty('default') ? Atom['default'] : Atom;
 var B__default = 'default' in B ? B['default'] : B;
 var K__default = 'default' in K ? K['default'] : K;
 var React__default = 'default' in React ? React['default'] : React;
-PropTypes = PropTypes && PropTypes.hasOwnProperty('default') ? PropTypes['default'] : PropTypes;
 
 var liftStaged = function liftStaged(fn) {
   return K.lift(infestines.pipe2U(fn, K.lift));
@@ -286,7 +285,7 @@ var view = /*#__PURE__*/infestines.curry(function (l, xs) {
 
 //
 
-var types = { context: PropTypes.any };
+var types = { context: react.PropTypes.any };
 
 var Context = /*#__PURE__*/infestines.inherit(function Context(props$$1) {
   Context.childContextTypes = types;

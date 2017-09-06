@@ -25,7 +25,7 @@ import {
 import {findHint, get} from "partial.lenses"
 import K, {lift, lift1, lift1Shallow} from "bacon.combines"
 import React, {fromBacon} from "baret"
-import PropTypes from "prop-types"
+import {PropTypes} from "react" // Transitional hack as there is no `prop-types` Bower package
 
 //
 
