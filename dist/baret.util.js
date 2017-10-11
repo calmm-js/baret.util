@@ -2,7 +2,7 @@
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('ramda'), require('bacon.atom'), require('baconjs'), require('infestines'), require('partial.lenses'), require('bacon.combines'), require('baret'), require('react')) :
 	typeof define === 'function' && define.amd ? define(['exports', 'ramda', 'bacon.atom', 'baconjs', 'infestines', 'partial.lenses', 'bacon.combines', 'baret', 'react'], factory) :
 	(factory((global.baret = global.baret || {}, global.baret.util = {}),global.R,global.bacon.atom,global.Bacon,global.I,global.L,global.K,global.baret,global.React));
-}(this, (function (exports,R,Atom,B,infestines,partial_lenses,K,React,react) { 'use strict';
+}(this, (function (exports,R,Atom,B,infestines,L,K,React,react) { 'use strict';
 
 Atom = Atom && Atom.hasOwnProperty('default') ? Atom['default'] : Atom;
 var B__default = 'default' in B ? B['default'] : B;
@@ -280,7 +280,7 @@ function iftes() {
 //
 
 var view = /*#__PURE__*/infestines.curry(function (l, xs) {
-  return xs instanceof B.Observable && infestines.isFunction(xs.view) ? xs.view(l) : K__default(l, xs, partial_lenses.get);
+  return xs instanceof B.Observable && infestines.isFunction(xs.view) ? xs.view(l) : K__default(l, xs, L.get);
 });
 
 //
@@ -394,13 +394,13 @@ var lift1ShallowMaybe = /*#__PURE__*/maybe( /*#__PURE__*/K.lift1Shallow);
 //export const composeP = /*#__PURE__*/liftMaybe(R.composeP)                     -> lift staged, useful?
 //export const forEach = /*#__PURE__*/liftMaybe(R.forEach)                       -> useful?
 //export const forEachObjIndexed = = /*#__PURE__*/liftMaybe(R.forEachObjIndexed) -> useful?
-//export const intersectionWith = /*#__PURE__*/liftMaybe(R.intersectionWith)     -> deprecated
 //export const lens = /*#__PURE__*/liftMaybe(R.lens)                             -> partial.lenses
 //export const lensIndex = /*#__PURE__*/liftMaybe(R.lensIndex)                   -> partial.lenses
 //export const lensPath = /*#__PURE__*/liftMaybe(R.lensPath)                     -> partial.lenses
 //export const lensProp = /*#__PURE__*/liftMaybe(R.lensProp)                     -> partial.lenses
 //export const lift = /*#__PURE__*/liftMaybe(R.lift)                             -> conflict
 //export const liftN = /*#__PURE__*/liftMaybe(R.liftN)                           -> conflict
+//export const memoize = /*#__PURE__*/liftStagedMaybe(R.memoize)
 //export const once = /*#__PURE__*/liftMaybe(R.once)                             -> lift staged, usually wrong thing to do?
 //export const over = /*#__PURE__*/liftMaybe(R.over)                             -> partial.lenses
 //export const pipeK = /*#__PURE__*/liftMaybe(R.pipeK)                           -> lift staged, useful?
@@ -425,6 +425,7 @@ var aperture$1 = /*#__PURE__*/liftMaybe(R.aperture);
 var append$1 = /*#__PURE__*/liftMaybe(R.append);
 var apply$1 = /*#__PURE__*/liftMaybe(R.apply);
 var applySpec$1 = /*#__PURE__*/liftMaybe(R.applySpec);
+var applyTo$1 = /*#__PURE__*/liftMaybe(R.applyTo);
 var ascend$1 = /*#__PURE__*/liftMaybe(stageLast2Of3Maybe(R.ascend));
 var assoc$1 = /*#__PURE__*/liftMaybe(R.assoc);
 var assocPath$1 = /*#__PURE__*/liftMaybe(R.assocPath);
@@ -467,7 +468,7 @@ var eqProps$1 = /*#__PURE__*/liftMaybe(stageLast2Of3Maybe(R.eqProps));
 var equals$1 = /*#__PURE__*/liftMaybe(R.equals);
 var evolve$1 = /*#__PURE__*/liftMaybe(R.evolve);
 var filter$1 = /*#__PURE__*/liftMaybe(R.filter);
-var find$1 = /*#__PURE__*/liftMaybe(R.find);
+var find$2 = /*#__PURE__*/liftMaybe(R.find);
 var findIndex$1 = /*#__PURE__*/liftMaybe(R.findIndex);
 var findLast$1 = /*#__PURE__*/liftMaybe(R.findLast);
 var findLastIndex$1 = /*#__PURE__*/liftMaybe(R.findLastIndex);
@@ -519,7 +520,6 @@ var max$1 = /*#__PURE__*/liftMaybe(R.max);
 var maxBy$1 = /*#__PURE__*/liftMaybe(R.maxBy);
 var mean$1 = /*#__PURE__*/liftMaybe(R.mean);
 var median$1 = /*#__PURE__*/liftMaybe(R.median);
-var memoize$1 = /*#__PURE__*/liftStagedMaybe(R.memoize);
 var memoizeWith$1 = /*#__PURE__*/liftStagedMaybe(R.memoizeWith);
 var merge$1 = /*#__PURE__*/liftMaybe(R.merge);
 var mergeAll$1 = /*#__PURE__*/liftMaybe(R.mergeAll);
@@ -691,11 +691,12 @@ var mapElems = /*#__PURE__*/infestines.curry(function (xi2y, xs) {
 
 //
 
-var mapElemsWithIds = /*#__PURE__*/infestines.curry(function (idOf, xi2y, xs) {
+var mapElemsWithIds = /*#__PURE__*/infestines.curry(function (idL, xi2y, xs) {
   var id2info = {};
-  var find$$1 = partial_lenses.findHint(function (x, info) {
+  var idOf = L.get(idL);
+  var pred = function pred(x, _, info) {
     return idOf(x) === info.id;
-  });
+  };
   return infestines.seq(xs, foldPast(function (ysIn, xsIn) {
     var n = xsIn.length;
     var ys = ysIn.length === n ? ysIn : Array(n);
@@ -706,7 +707,7 @@ var mapElemsWithIds = /*#__PURE__*/infestines.curry(function (idOf, xi2y, xs) {
         info = id2info[_id2] = {};
         info.id = _id2;
         info.hint = i;
-        info.elem = xi2y(view(find$$1(info), xs), _id2);
+        info.elem = xi2y(view(L.find(pred, info), xs), _id2);
       }
       if (ys[i] !== info.elem) {
         info.hint = i;
@@ -804,6 +805,7 @@ exports.aperture = aperture$1;
 exports.append = append$1;
 exports.apply = apply$1;
 exports.applySpec = applySpec$1;
+exports.applyTo = applyTo$1;
 exports.ascend = ascend$1;
 exports.assoc = assoc$1;
 exports.assocPath = assocPath$1;
@@ -846,7 +848,7 @@ exports.eqProps = eqProps$1;
 exports.equals = equals$1;
 exports.evolve = evolve$1;
 exports.filter = filter$1;
-exports.find = find$1;
+exports.find = find$2;
 exports.findIndex = findIndex$1;
 exports.findLast = findLast$1;
 exports.findLastIndex = findLastIndex$1;
@@ -898,7 +900,6 @@ exports.max = max$1;
 exports.maxBy = maxBy$1;
 exports.mean = mean$1;
 exports.median = median$1;
-exports.memoize = memoize$1;
 exports.memoizeWith = memoizeWith$1;
 exports.merge = merge$1;
 exports.mergeAll = mergeAll$1;
