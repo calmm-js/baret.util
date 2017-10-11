@@ -12,11 +12,11 @@
   ],
   "homepage": "https://github.com/calmm-js/baret.util",
   "dependencies": {
-    "infestines": "^0.4.4",
+    "infestines": "^0.4.5",
     "baret": "^1.0.0",
     "bacon.combines": "^0.1",
     "bacon.atom": "^5.0.0",
-    "partial.lenses": "^11.0.0",
+    "partial.lenses": "^12.0.0",
     "react": "^15.0.1",
     "ramda": "^0.24.0",
     "bacon": "^0.7.94"

@@ -54,11 +54,11 @@
     "rollup-plugin-uglify": "^2.0.1"
   },
   "dependencies": {
-    "infestines": "^0.4.4",
+    "infestines": "^0.4.5",
     "baret": "^1.0.0",
     "bacon.combines": "^0.1",
     "bacon.atom": "^5.0.0",
-    "partial.lenses": "^11.0.0",
+    "partial.lenses": "^12.0.0",
     "react": "^15.0.1",
     "ramda": "^0.24.0"
   },

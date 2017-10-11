@@ -22,7 +22,7 @@ import {
   seqPartial
 } from "infestines"
 
-import {findHint, get} from "partial.lenses"
+import * as L from "partial.lenses"
 import K, {lift, lift1, lift1Shallow} from "bacon.combines"
 import React, {fromBacon} from "baret"
 import {PropTypes} from "react" // Transitional hack as there is no `prop-types` Bower package
@@ -234,7 +234,7 @@ export function iftes() {
 export const view = /*#__PURE__*/I_curry((l, xs) =>
   xs instanceof Observable && isFunction(xs.view)
   ? xs.view(l)
-  : K(l, xs, get))
+  : K(l, xs, L.get))
 
 //
 
@@ -598,9 +598,10 @@ export const mapElems = /*#__PURE__*/I_curry((xi2y, xs) => seq(
 
 //
 
-export const mapElemsWithIds = /*#__PURE__*/I_curry((idOf, xi2y, xs) => {
+export const mapElemsWithIds = /*#__PURE__*/I_curry((idL, xi2y, xs) => {
   const id2info = {}
-  const find = findHint((x, info) => idOf(x) === info.id)
+  const idOf = L.get(idL)
+  const pred = (x, _, info) => idOf(x) === info.id
   return seq(
     xs,
     foldPast((ysIn, xsIn) => {
@@ -613,7 +614,7 @@ export const mapElemsWithIds = /*#__PURE__*/I_curry((idOf, xi2y, xs) => {
           info = id2info[id] = {}
           info.id = id
           info.hint = i
-          info.elem = xi2y(view(find(info), xs), id)
+          info.elem = xi2y(view(L.find(pred, info), xs), id)
         }
         if (ys[i] !== info.elem) {
           info.hint = i
