@@ -1,6 +1,6 @@
 {
   "name": "baret.util",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Utilities for working with Baret",
   "module": "dist/baret.util.es.js",
   "main": "dist/baret.util.cjs.js",
@@ -39,8 +39,8 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-3": "^6.24.1",
     "babel-register": "^6.26.0",
-    "codecov": "^2.3.0",
-    "eslint": "^4.8.0",
+    "codecov": "^2.3.1",
+    "eslint": "^4.9.0",
     "eslint-plugin-react": "^7.4.0",
     "baconjs": "^0.7.95",
     "mocha": "^4.0.1",
@@ -58,7 +58,7 @@
     "baret": "^1.0.0",
     "bacon.combines": "^0.1",
     "bacon.atom": "^5.0.0",
-    "partial.lenses": "^12.0.0",
+    "partial.lenses": "^13.0.0",
     "react": "^15.0.1",
     "ramda": "^0.25.0"
   },
