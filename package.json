@@ -1,6 +1,6 @@
 {
   "name": "baret.util",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Utilities for working with Baret",
   "module": "dist/baret.util.es.js",
   "main": "dist/baret.util.cjs.js",
