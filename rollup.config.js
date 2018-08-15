@@ -2,7 +2,7 @@ import babel       from "rollup-plugin-babel"
 import commonjs    from "rollup-plugin-commonjs"
 import nodeResolve from "rollup-plugin-node-resolve"
 import replace     from "rollup-plugin-replace"
-import uglify      from "rollup-plugin-uglify"
+import {uglify}    from "rollup-plugin-uglify"
 
 export default {
   external: ["infestines",
@@ -40,6 +40,13 @@ export default {
     }),
     babel(),
     process.env.NODE_ENV === "production" &&
-      uglify()
+      uglify({
+        compress: {
+          hoist_funs: true,
+          passes: 3,
+          pure_getters: true,
+          pure_funcs: ['require']
+        }
+      })
   ].filter(x => x)
 }

@@ -16,7 +16,7 @@
     "baret": "^1.0.0",
     "bacon.combines": "^0.1",
     "bacon.atom": "^5.0.0",
-    "partial.lenses": "^13.0.0",
+    "partial.lenses": ">=13.0.0 <15.0.0",
     "react": "^15.0.1",
     "ramda": "^0.25.0",
     "bacon": "^0.7.94"
