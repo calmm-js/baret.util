@@ -14,16 +14,18 @@ export default {
              "ramda",
              "baconjs",
              "bacon.combines"],
-  globals: {
-    "infestines": "I",
-    "baret": "baret",
-    "baconjs": "Bacon",
-    "bacon.combines": "K",
-    "bacon.atom": "bacon.atom",
-    "partial.lenses": "L",
-    "prop-types": "PropTypes",
-    "react": "React",
-    "ramda": "R"
+  output: {
+    globals: {
+      "infestines": "I",
+      "baret": "baret",
+      "baconjs": "Bacon",
+      "bacon.combines": "K",
+      "bacon.atom": "bacon.atom",
+      "partial.lenses": "L",
+      "prop-types": "PropTypes",
+      "react": "React",
+      "ramda": "R"
+    }
   },
   plugins: [
     process.env.NODE_ENV && replace({
