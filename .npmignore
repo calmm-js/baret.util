@@ -6,5 +6,6 @@
 bench
 bower.json
 docs
+rollup.config.js
 scripts
 test
